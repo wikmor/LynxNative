@@ -12,11 +12,22 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import me.wikmor.lynx.api.CowExplodeEvent;
 import me.wikmor.lynx.listener.PlayerListener;
+import me.wikmor.lynx.util.Log;
 
 public final class LynxNative extends JavaPlugin implements Listener {
 
 	@Override
 	public void onEnable() {
+		System.out.println("LynxNative is now ready to operate!");
+
+		Bukkit.getLogger().info("Hey from bukkit logger!");
+
+		getLogger().info("Information message");
+		getLogger().warning("Warning!");
+		getLogger().severe("lol your plugin failed");
+
+		Log.log("&cThis message should be in red");
+
 		getServer().getPluginManager().registerEvents(this, this);
 		getServer().getPluginManager().registerEvents(PlayerListener.getInstance()/*new PlayerListener() creating new object each time, this is fine unless we reload the plugin*/, this);
 	}
