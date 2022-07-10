@@ -13,8 +13,16 @@ author: ${author}
 # DO NOT EDIT. This api-version is used for maximum backward compatibility.
 api-version: 1.13
 
-#
-# The commands are built at runtime so you can change them easily within the settings.
-# Do not change anything in here, you will break the plugin and get no support.
-#
-commands: 
+commands:
+  spawnentity:
+    description: Spawn a mob at the given location.
+    aliases:
+      - spawnmob
+      - spawnanimal
+      - spawne
+    permission: lynxnative.command.spawnentity
+    permission-message: You cannot spawn custom mobs!
+    usage: |-
+      /<command> <mobType> <playerName> - Spawn a mob at the player's location.
+      /<command> <mobType> <x> <y> <z> - Spawns a mob at the given location.
+    
