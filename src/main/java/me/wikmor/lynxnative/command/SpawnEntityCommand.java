@@ -1,4 +1,4 @@
-package me.wikmor.lynx.command;
+package me.wikmor.lynxnative.command;
 
 import java.util.ArrayList;
 import java.util.List;

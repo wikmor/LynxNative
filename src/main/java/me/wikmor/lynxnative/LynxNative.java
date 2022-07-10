@@ -1,4 +1,4 @@
-package me.wikmor.lynx;
+package me.wikmor.lynxnative;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Cow;
@@ -10,10 +10,10 @@ import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import me.wikmor.lynx.api.CowExplodeEvent;
-import me.wikmor.lynx.command.SpawnEntityCommand;
-import me.wikmor.lynx.listener.PlayerListener;
-import me.wikmor.lynx.util.Log;
+import me.wikmor.lynxnative.api.CowExplodeEvent;
+import me.wikmor.lynxnative.command.SpawnEntityCommand;
+import me.wikmor.lynxnative.listener.PlayerListener;
+import me.wikmor.lynxnative.util.Log;
 
 public final class LynxNative extends JavaPlugin implements Listener {
 

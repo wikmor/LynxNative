@@ -1,4 +1,4 @@
-package me.wikmor.lynx.listener;
+package me.wikmor.lynxnative.listener;
 
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;

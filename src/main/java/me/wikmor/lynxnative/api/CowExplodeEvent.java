@@ -1,4 +1,4 @@
-package me.wikmor.lynx.api;
+package me.wikmor.lynxnative.api;
 
 import org.bukkit.entity.Entity;
 import org.bukkit.event.Cancellable;

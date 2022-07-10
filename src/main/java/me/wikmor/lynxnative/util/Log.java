@@ -1,4 +1,4 @@
-package me.wikmor.lynx.util;
+package me.wikmor.lynxnative.util;
 
 import org.bukkit.Bukkit;
 import org.bukkit.command.ConsoleCommandSender;
