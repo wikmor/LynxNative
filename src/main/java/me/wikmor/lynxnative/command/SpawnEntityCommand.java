@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.World;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -16,19 +17,15 @@ import net.md_5.bungee.api.ChatColor;
 
 public class SpawnEntityCommand implements CommandExecutor, TabCompleter {
 
+	// /spawne <mobType> <playerName> - only players can execute
+	// /spawne <mobType> <world> <x> <y> <z> - players and console
+
 	@Override
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-
-		if (!(sender instanceof Player)) {
-			sender.sendMessage("You must be a player to run this command!");
-
-			return true;
-		}
 
 		if (args.length < 2)
 			return false;
 
-		Player player = (Player) sender;
 		EntityType entityType;
 
 		try {
@@ -46,10 +43,18 @@ public class SpawnEntityCommand implements CommandExecutor, TabCompleter {
 			return true;
 		}
 
-		if (args.length == 4) {
-			int x = this.parseNumber(args, 1);
-			int y = this.parseNumber(args, 2);
-			int z = this.parseNumber(args, 3);
+		if (args.length == 5) {
+			String worldName = args[1];
+			World world = Bukkit.getWorld(worldName);
+			int x = this.parseNumber(args, 2);
+			int y = this.parseNumber(args, 3);
+			int z = this.parseNumber(args, 4);
+
+			if (world == null) {
+				sender.sendMessage(ChatColor.RED + "Invalid world! You typed: " + worldName);
+
+				return true;
+			}
 
 			if (x == -1 || y == -1 || z == -1) {
 				sender.sendMessage(ChatColor.RED + "Please check your positions, XYZ coordinates must be a whole number! You typed: " + String.join(" ", args));
@@ -57,21 +62,33 @@ public class SpawnEntityCommand implements CommandExecutor, TabCompleter {
 				return true;
 			}
 
-			Location location = new Location(player.getWorld(), x, y, z);
-			player.getWorld().spawnEntity(location, entityType);
+			Location location = new Location(world, x, y, z);
+			world.spawnEntity(location, entityType);
 
+			sender.sendMessage(ChatColor.GREEN + "Spawned " + entityType.toString().toLowerCase() + " at " + worldName + " " + x + " " + y + " " + z);
+			return true;
 		}
 
 		else if (args.length == 2) {
+			if (!(sender instanceof Player)) {
+				sender.sendMessage("You must be a player to run this command!");
+
+				return true;
+			}
+
+			Player player = (Player) sender;
 			Player targetPlayer = Bukkit.getPlayer(args[1]);
 
 			if (targetPlayer == null) {
-				sender.sendMessage(ChatColor.RED + "Player '" + args[1] + "' is not online!");
+				player.sendMessage(ChatColor.RED + "Player '" + args[1] + "' is not online!");
 
 				return true;
 			}
 
 			targetPlayer.getWorld().spawnEntity(targetPlayer.getLocation(), entityType);
+
+			player.sendMessage(ChatColor.GREEN + "Spawned " + entityType.toString().toLowerCase() + " at " + targetPlayer.getName() + "'s location.");
+			return true;
 		}
 
 		return false; // false = player gets to see the Usage message
@@ -88,12 +105,7 @@ public class SpawnEntityCommand implements CommandExecutor, TabCompleter {
 
 	@Override
 	public List<String> onTabComplete(CommandSender sender, Command command, String label, String[] args) {
-
-		if (!(sender instanceof Player))
-			return new ArrayList<>();
-
 		List<String> completions = new ArrayList<>();
-		Player player = (Player) sender;
 
 		switch (args.length) {
 			case 1:
@@ -108,23 +120,48 @@ public class SpawnEntityCommand implements CommandExecutor, TabCompleter {
 				break;
 
 			case 2:
-				for (Player onlinePlayer : Bukkit.getOnlinePlayers()) {
-					String name = onlinePlayer.getName();
+				if (sender instanceof Player) {
+					for (Player onlinePlayer : Bukkit.getOnlinePlayers()) {
+						String name = onlinePlayer.getName();
 
-					if (name.startsWith(args[1]))
-						completions.add(name);
+						if (name.startsWith(args[1]))
+							completions.add(name);
+					}
 				}
 
-				completions.add(String.valueOf(player.getLocation().getBlockX()));
+				for (World world : Bukkit.getWorlds()) {
+					String worldName = world.getName();
+
+					if (worldName.startsWith(args[1]))
+						completions.add(worldName);
+				}
+
 				break;
 
 			case 3:
-				completions.add(String.valueOf(player.getLocation().getBlockY()));
+				if (sender instanceof Player) {
+					Player player = (Player) sender;
+
+					completions.add(String.valueOf(player.getLocation().getBlockX()));
+				}
 
 				break;
 
 			case 4:
-				completions.add(String.valueOf(player.getLocation().getBlockZ()));
+				if (sender instanceof Player) {
+					Player player = (Player) sender;
+
+					completions.add(String.valueOf(player.getLocation().getBlockY()));
+				}
+
+				break;
+
+			case 5:
+				if (sender instanceof Player) {
+					Player player = (Player) sender;
+
+					completions.add(String.valueOf(player.getLocation().getBlockZ()));
+				}
 
 				break;
 		}

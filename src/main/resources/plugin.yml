@@ -24,5 +24,5 @@ commands:
     permission-message: You cannot spawn custom mobs!
     usage: |-
       /<command> <mobType> <playerName> - Spawn a mob at the player's location.
-      /<command> <mobType> <x> <y> <z> - Spawns a mob at the given location.
+      /<command> <mobType> <world> <x> <y> <z> - Spawns a mob at the given location.
     
