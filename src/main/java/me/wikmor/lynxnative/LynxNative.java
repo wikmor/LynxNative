@@ -11,6 +11,7 @@ import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import me.wikmor.lynxnative.api.CowExplodeEvent;
+import me.wikmor.lynxnative.command.ChannelCommandGroup;
 import me.wikmor.lynxnative.command.SpawnEntityCommand;
 import me.wikmor.lynxnative.listener.PlayerListener;
 import me.wikmor.lynxnative.util.Log;
@@ -33,6 +34,7 @@ public final class LynxNative extends JavaPlugin implements Listener {
 		getServer().getPluginManager().registerEvents(PlayerListener.getInstance()/*new PlayerListener() creating new object each time, this is fine unless we reload the plugin*/, this);
 
 		getCommand("spawnentity").setExecutor(new SpawnEntityCommand());
+		getCommand("channel").setExecutor(new ChannelCommandGroup());
 	}
 
 	@EventHandler

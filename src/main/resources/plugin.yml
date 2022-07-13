@@ -25,4 +25,4 @@ commands:
     usage: |-
       /<command> <mobType> <playerName> - Spawn a mob at the player's location.
       /<command> <mobType> <world> <x> <y> <z> - Spawns a mob at the given location.
-    
+  channel:  
