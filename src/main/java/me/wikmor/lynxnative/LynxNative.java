@@ -12,6 +12,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import me.wikmor.lynxnative.api.CowExplodeEvent;
 import me.wikmor.lynxnative.command.ChannelCommandGroup;
+import me.wikmor.lynxnative.command.FireCommand;
 import me.wikmor.lynxnative.command.SpawnEntityCommand;
 import me.wikmor.lynxnative.listener.PlayerListener;
 import me.wikmor.lynxnative.util.Log;
@@ -35,6 +36,7 @@ public final class LynxNative extends JavaPlugin implements Listener {
 
 		getCommand("spawnentity").setExecutor(new SpawnEntityCommand());
 		getCommand("channel").setExecutor(new ChannelCommandGroup());
+		getCommand("fire").setExecutor(new FireCommand());
 	}
 
 	@EventHandler
