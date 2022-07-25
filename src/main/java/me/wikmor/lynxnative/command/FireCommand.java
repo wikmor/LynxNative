@@ -5,7 +5,9 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.scheduler.BukkitRunnable;
 
+import me.wikmor.lynxnative.LynxNative;
 import net.md_5.bungee.api.ChatColor;
 
 public class FireCommand implements CommandExecutor {
@@ -39,7 +41,20 @@ public class FireCommand implements CommandExecutor {
 			return true;
 		}
 
-		target.setFireTicks(20 * 2);
+		new BukkitRunnable() {
+
+			@Override
+			public void run() {
+
+				if (target.isDead()) {
+					cancel();
+
+					return;
+				}
+
+				target.setFireTicks(20 * 2);
+			}
+		}.runTaskTimer(LynxNative.getInstance(), 20 * 3, 20 * 2);
 
 		return true;
 	}
