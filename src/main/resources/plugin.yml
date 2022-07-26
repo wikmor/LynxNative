@@ -27,6 +27,7 @@ commands:
       /<command> <mobType> <world> <x> <y> <z> - Spawns a mob at the given location.
   channel:
   fire:
+  settab:
 
 permissions:
   lynx.command.fire:

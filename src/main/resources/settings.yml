@@ -1,0 +1,15 @@
+player-health: 20
+player-name: "&ctest ''name"
+player-achievements:
+  - "20"
+  - "Kill 10 Bosses"
+  
+boss:
+  damage-multiplier: 18.5
+  alias: "&cTest \"Name"
+  
+multiline-message: |-
+  Hello
+  world
+  dassadssd
+  asd
