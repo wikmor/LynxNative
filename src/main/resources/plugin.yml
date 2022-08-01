@@ -28,6 +28,7 @@ commands:
   channel:
   fire:
   settab:
+  question:
 
 permissions:
   lynx.command.fire:

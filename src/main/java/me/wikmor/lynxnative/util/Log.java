@@ -15,7 +15,11 @@ public class Log {
 	}
 
 	public static void tell(Player player, String message) {
-		player.sendMessage(ChatColor.translateAlternateColorCodes('&', message));
+		player.sendMessage(colorize(message));
+	}
+
+	public static String colorize(String message) {
+		return ChatColor.translateAlternateColorCodes('&', message);
 	}
 
 	/*public static Logger getLogger() {

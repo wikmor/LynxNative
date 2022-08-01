@@ -17,6 +17,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 import me.wikmor.lynxnative.api.CowExplodeEvent;
 import me.wikmor.lynxnative.command.ChannelCommandGroup;
 import me.wikmor.lynxnative.command.FireCommand;
+import me.wikmor.lynxnative.command.QuestionCommand;
 import me.wikmor.lynxnative.command.SetTabCommand;
 import me.wikmor.lynxnative.command.SpawnEntityCommand;
 import me.wikmor.lynxnative.listener.PlayerListener;
@@ -51,8 +52,9 @@ public final class LynxNative extends JavaPlugin implements Listener {
 		getCommand("channel").setExecutor(new ChannelCommandGroup());
 		getCommand("fire").setExecutor(new FireCommand());
 		getCommand("settab").setExecutor(new SetTabCommand());
+		getCommand("question").setExecutor(new QuestionCommand());
 
-		//restartTasks();
+		restartTasks();
 
 		// This is how to run a task right after your plugin has been enabled.
 		/*new BukkitRunnable() {
@@ -66,13 +68,13 @@ public final class LynxNative extends JavaPlugin implements Listener {
 	}
 
 	/*public void heavyCalculation() {
-
+	
 		new BukkitRunnable() {
 			@Override
 			public void run() {
 				// do the operation right here, e.g.
 				Object playerData = connectToInternetAndDownloadData();
-
+	
 				new BukkitRunnable() {
 					@Override
 					public void run() {
@@ -80,7 +82,7 @@ public final class LynxNative extends JavaPlugin implements Listener {
 					}
 				}.runTask(LynxNative.getInstance());
 			}
-
+	
 			private Object connectToInternetAndDownloadData() {
 				return null;
 			}
@@ -89,7 +91,7 @@ public final class LynxNative extends JavaPlugin implements Listener {
 
 	/*public void reload() {
 		restartTasks();
-
+	
 		Settings.load();
 	}*/
 
