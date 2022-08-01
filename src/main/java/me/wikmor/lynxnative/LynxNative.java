@@ -68,13 +68,13 @@ public final class LynxNative extends JavaPlugin implements Listener {
 	}
 
 	/*public void heavyCalculation() {
-	
+
 		new BukkitRunnable() {
 			@Override
 			public void run() {
 				// do the operation right here, e.g.
 				Object playerData = connectToInternetAndDownloadData();
-	
+
 				new BukkitRunnable() {
 					@Override
 					public void run() {
@@ -82,7 +82,7 @@ public final class LynxNative extends JavaPlugin implements Listener {
 					}
 				}.runTask(LynxNative.getInstance());
 			}
-	
+
 			private Object connectToInternetAndDownloadData() {
 				return null;
 			}
@@ -91,7 +91,7 @@ public final class LynxNative extends JavaPlugin implements Listener {
 
 	/*public void reload() {
 		restartTasks();
-	
+
 		Settings.load();
 	}*/
 
@@ -101,6 +101,8 @@ public final class LynxNative extends JavaPlugin implements Listener {
 
 		this.broadcasterTask = new Broadcaster();
 		this.broadcasterTask.runTaskTimer(this, 0, 20);
+
+		new ParticleRenderer().runTaskTimer(this, 0, 1);
 	}
 
 	@EventHandler
